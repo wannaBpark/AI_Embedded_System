@@ -1,0 +1,32 @@
+module_init(GPIO_init);
+module_exit(GPIO_exit);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Heejin Park");
+MODULE_DESCRIPTION("Raspberry Pi 3 GPIO Device Driver Module");
+
+추가 후,
+
+rmmod insmod 실행 이상 없는지 확인
+
+
+2. 각 스위치 별로 누를 때마다 해당 LED 출력 잘 되는지 확인
+
+
+3. 1~3번 실행 중 문자열 잘 전달이 되고,
+랜덤으로 시퀀스 결정 + 시퀀스 길이 만큼 LED 출력되는지 확인
+
+4. 유저의 스위치 입력 잘 되는지 저장
+a) 입력되는 0.5초 동안 다른 입력 못받도록
+b) 입력 받은 값은 모듈 안의 userinput 배열안에 잘 저장되는지도 확인 (길이도 일치하는지)
+
+5. 완료 스위치 눌렀을 때의 인터럽트 핸들러 등록
+a) 사용자 애플리 케이션에게 입력 결과 전달
+b) 사용자 애플리케이션은 그 결과 출력
+
+Q.)  디
+바이스 드라이버는 사용자 애플리케이션에게 입력 결과를 알려주는데,
+
+이 때 디바이스 드라이버는 Your input is correct를 app 에 전달하는가, (이걸로 이해함, 이래야 디바이스 드라이버 쪽에서 점등한 시퀀스랑 비교 검사하지 ㅇㅇ)
+아니면 입력 결과 시퀀스를 전달하는가?
+

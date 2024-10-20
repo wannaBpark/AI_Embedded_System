@@ -1,0 +1,32 @@
+make clean && make
+sudo insmod ./game_module.ko
+
+sudo mknod /dev/gpioled c 200 0 && sudo chmod 666 /dev/gpioled
+
+gcc -o led_game led_game.c
+
+./led_game 1
+
+sudo lsof /dev/gpioled
+sudo ps -e | grep led
+
+kill -9 pid
+
+while true; do dmesg ; sleep 1 ; done ;
+
+
+
+과제하며 자주 썼던 명령어 공유드립니다.
+
+- gpio_led 프로세스 pid 찾기
+a) sudo ps -e | grep led // 전체 프로세스 중 찾기
+b) sudo lsof /dev/gpioled // 해당 디바이스 파일 사용 프로세스 찾기
+
+sudo kill [pid]
+
+2. linux/random.h
+stdlib.h의 rand() 대신 
+사용했던 get_random_bytes() 
+전방선언하는 헤더파일 입니다.
+
+질문이있습니다. 디바이스 드라이버 구현 코드 내의 모든 변수 (지역,전역)은 모듈이 로드된 상태에서 유효한가요?
